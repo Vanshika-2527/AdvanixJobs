@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Find Jobs | Advanix</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container">
+      <a href="index.html" class="logo">
+        <div class="logo-icon"><i class="fas fa-briefcase"></i></div>
+        <span>Advanix<span class="text-gradient">Jobs</span></span>
+      </a>
+      <div class="nav-links" id="nav-links"></div>
+      <div class="auth-btns" id="auth-btns"></div>
+      <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobile-menu"></div>
+
+  <section class="section" style="padding-top: 40px;">
+    <div class="container">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+        <div>
+          <h1 class="text-2xl font-bold text-slate-900">Find Jobs</h1>
+          <p class="text-slate-600">Discover internships and full-time roles that match your skills.</p>
+        </div>
+      </div>
+
+      <!-- Search & filters -->
+      <div class="bg-white rounded-2xl shadow-sm border border-slate-100 p-6 mb-8">
+        <div class="grid md:grid-cols-12 gap-4">
+          <div class="md:col-span-4 form-group">
+            <label class="text-sm font-semibold text-slate-700 mb-2 block">Job title / skills</label>
+            <input type="text" id="job-search" class="form-control" placeholder="e.g. React Developer, Python" />
+          </div>
+          <div class="md:col-span-2 form-group">
+            <label class="text-sm font-semibold text-slate-700 mb-2 block">Location</label>
+            <select id="filter-location" class="form-control"></select>
+          </div>
+          <div class="md:col-span-2 form-group">
+            <label class="text-sm font-semibold text-slate-700 mb-2 block">Job type</label>
+            <select id="filter-job-type" class="form-control"></select>
+          </div>
+          <div class="md:col-span-2 form-group">
+            <label class="text-sm font-semibold text-slate-700 mb-2 block">Work mode</label>
+            <select id="filter-work-mode" class="form-control"></select>
+          </div>
+          <div class="md:col-span-2 form-group">
+            <label class="text-sm font-semibold text-slate-700 mb-2 block">Experience</label>
+            <select id="filter-experience" class="form-control"></select>
+          </div>
+        </div>
+        <div class="grid md:grid-cols-12 gap-4 mt-4 pt-4 border-t border-slate-50">
+          <div class="md:col-span-2 form-group">
+            <label class="text-sm font-semibold text-slate-700 mb-2 block">Min salary (₹)</label>
+            <input type="number" id="filter-salary" class="form-control" placeholder="e.g. 20000" />
+          </div>
+          <div class="md:col-span-2 form-group">
+            <label class="text-sm font-semibold text-slate-700 mb-2 block">Sort by</label>
+            <select id="sort-select" class="form-control">
+              <option value="newest">Newest first</option>
+              <option value="relevance">Relevance</option>
+            </select>
+          </div>
+          <div class="md:col-span-2 flex items-end">
+            <button id="clear-filters" class="w-full py-2.5 border border-slate-200 rounded-lg text-slate-600 font-medium hover:bg-slate-50 transition text-sm">Clear filters</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Results -->
+      <div class="flex justify-between items-center mb-6">
+        <div>
+          <p class="text-sm font-semibold text-slate-800">Showing <span id="results-count" class="text-indigo-600 font-bold">0</span> jobs</p>
+        </div>
+      </div>
+
+      <div class="featured-grid" id="jobs-list">
+        <!-- Job cards rendered by JS -->
+      </div>
+    </div>
+  </section>
+
+  <script type="module">
+    import { updateNavbar } from './js/app.js';
+    document.addEventListener('DOMContentLoaded', () => {
+      updateNavbar();
+      window.initJobsPage();
+      // Apply initial query from URL (e.g. from landing page hero/category)
+      const params = new URLSearchParams(location.search);
+      if (params.get('q')) {
+        const input = document.getElementById('job-search');
+        if (input) input.value = params.get('q');
+      }
+      if (params.get('location')) {
+        const sel = document.getElementById('filter-location');
+        if (sel) sel.value = params.get('location');
+      }
+      if (params.get('jobType')) {
+        const sel = document.getElementById('filter-job-type');
+        if (sel) sel.value = params.get('jobType');
+      }
+      // Trigger render after a tick so filters populate
+      setTimeout(() => { if (window.renderJobsPage) window.renderJobsPage(); }, 100);
+    });
+  </script>
+</body>
+</html>

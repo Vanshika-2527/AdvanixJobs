@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Recruiter Dashboard | Advanix</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/dashboard.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body>
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <div class="logo-icon"><i class="fas fa-briefcase"></i></div>
+      <span>Advanix<span class="text-gradient">Jobs</span></span>
+    </div>
+    <nav>
+      <a href="recruiter-dashboard.html" class="sidebar-item active" id="nav-dashboard">
+        <i class="fas fa-chart-pie"></i> Dashboard
+      </a>
+      <a href="jobs.html" class="sidebar-item" id="nav-find-jobs">
+        <i class="fas fa-search"></i> Find Jobs
+      </a>
+      <a href="#applicants" class="sidebar-item" id="nav-applicants">
+        <i class="fas fa-users"></i> Applicants
+      </a>
+      <a href="#manage-jobs" class="sidebar-item" id="nav-manage-jobs">
+        <i class="fas fa-tasks"></i> Manage Jobs
+      </a>
+    </nav>
+    <div class="sidebar-logout" id="nav-logout">
+      <i class="fas fa-sign-out-alt"></i> Logout
+    </div>
+  </aside>
+
+  <!-- Main content -->
+  <main class="dashboard-main">
+    <header class="dashboard-header">
+      <div>
+        <h1 id="welcome-user">Hi, Recruiter</h1>
+        <p>Manage your job listings and review applications.</p>
+      </div>
+      <button id="post-job-btn" class="btn btn-primary btn-md">
+        <i class="fas fa-plus mr-2"></i> Post New Job
+      </button>
+    </header>
+
+    <!-- Stats -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-header">
+          <h3>Active Jobs</h3>
+          <div class="stat-icon jobs"><i class="fas fa-briefcase"></i></div>
+        </div>
+        <div class="stat-value" id="stat-active-jobs">0</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-header">
+          <h3>Applications</h3>
+          <div class="stat-icon saved"><i class="fas fa-inbox"></i></div>
+        </div>
+        <div class="stat-value" id="stat-total-apps">0</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-header">
+          <h3>Shortlisted</h3>
+          <div class="stat-icon applied"><i class="fas fa-check-circle"></i></div>
+        </div>
+        <div class="stat-value" id="stat-shortlisted">0</div>
+      </div>
+    </div>
+
+    <!-- Recent applications -->
+    <div class="dashboard-section">
+      <div class="manage-jobs-header">
+        <h2><i class="fas fa-inbox"></i> Recent Applications</h2>
+      </div>
+      <div class="applications-list" id="recent-applications">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+
+    <!-- Post job modal -->
+    <div class="modal-overlay hidden" id="post-job-modal">
+      <div class="modal">
+        <div class="modal-header">
+          <h3 id="post-job-modal-title">Post a New Job</h3>
+          <button id="post-job-close" class="modal-close">&times;</button>
+        </div>
+        <div class="modal-body">
+          <form id="post-job-form" class="post-job-form">
+            <div class="form-group">
+              <label>Job title</label>
+              <input type="text" id="job-title" class="form-control" placeholder="e.g. Frontend Intern" required />
+            </div>
+            <div class="form-group">
+              <label>Company</label>
+              <input type="text" id="job-company" class="form-control" placeholder="e.g. Zomato" required />
+            </div>
+            <div class="form-group full-width">
+              <label>Job description</label>
+              <textarea id="job-description" class="form-control" rows="4" placeholder="Describe the role and responsibilities..." required></textarea>
+            </div>
+            <div class="form-group full-width">
+              <label>Responsibilities (one per line)</label>
+              <textarea id="job-responsibilities" class="form-control" rows="3" placeholder="• Develop features\n• Fix bugs\n• Attend standups"></textarea>
+            </div>
+            <div class="form-group full-width">
+              <label>Qualifications (one per line)</label>
+              <textarea id="job-qualifications" class="form-control" rows="3" placeholder="• Degree in CS\n• 1+ years experience"></textarea>
+            </div>
+            <div class="form-group">
+              <label>Required skills (comma-separated)</label>
+              <input type="text" id="job-skills" class="form-control" placeholder="HTML, CSS, JavaScript, React" required />
+            </div>
+            <div class="form-group">
+              <label>Location</label>
+              <input type="text" id="job-location" class="form-control" placeholder="Bangalore, Karnataka" required />
+            </div>
+            <div class="form-group">
+              <label>Salary / stipend</label>
+              <input type="text" id="job-salary" class="form-control" placeholder="₹20,000 / month" required />
+            </div>
+            <div class="form-group">
+              <label>Job type</label>
+              <select id="job-type" class="form-control">
+                <option value="Internship">Internship</option>
+                <option value="Full-time">Full-time</option>
+                <option value="Part-time">Part-time</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Work mode</label>
+              <select id="job-workmode" class="form-control">
+                <option value="Remote">Remote</option>
+                <option value="Hybrid">Hybrid</option>
+                <option value="On-site">On-site</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Experience required</label>
+              <input type="text" id="job-experience" class="form-control" placeholder="0-1 years" required />
+            </div>
+            <div class="form-group">
+              <label>Application deadline</label>
+              <input type="date" id="job-deadline" class="form-control" required />
+            </div>
+            <input type="hidden" id="edit-job-id" />
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="post-job-cancel" class="btn btn-secondary">Cancel</button>
+          <button type="submit" form="post-job-form" id="post-job-submit" class="btn btn-primary">Post Job</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Manage jobs -->
+    <div class="dashboard-section" id="manage-jobs">
+      <div class="manage-jobs-header">
+        <h2><i class="fas fa-tasks"></i> Manage Your Jobs</h2>
+      </div>
+      <div id="manage-jobs-list">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+  </main>
+
+  <script type="module">
+    import { updateNavbar } from './js/app.js';
+    document.addEventListener('DOMContentLoaded', () => {
+      updateNavbar();
+      const logoutBtn = document.getElementById('nav-logout');
+      if (logoutBtn) logoutBtn.addEventListener('click', () => { window.handleLogout(); });
+      window.initRecruiterDashboard();
+      window.initPostJobForm();
+    });
+  </script>
+</body>
+</html>

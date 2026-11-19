@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Dashboard | Advanix</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/dashboard.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body>
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <div class="logo-icon"><i class="fas fa-briefcase"></i></div>
+      <span>Advanix<span class="text-gradient">Jobs</span></span>
+    </div>
+    <nav>
+      <a href="student-dashboard.html" class="sidebar-item active" id="nav-dashboard">
+        <i class="fas fa-chart-pie"></i> Dashboard
+      </a>
+      <a href="jobs.html" class="sidebar-item" id="nav-find-jobs">
+        <i class="fas fa-search"></i> Find Jobs
+      </a>
+      <a href="student-dashboard.html#recommended" class="sidebar-item" id="nav-recommended">
+        <i class="fas fa-magic"></i> Recommended Jobs
+      </a>
+      <a href="student-dashboard.html#saved" class="sidebar-item" id="nav-saved">
+        <i class="fas fa-bookmark"></i> Saved Jobs
+      </a>
+      <a href="student-dashboard.html#applications" class="sidebar-item" id="nav-applications">
+        <i class="fas fa-file-alt"></i> My Applications
+      </a>
+      <a href="profile.html" class="sidebar-item" id="nav-profile">
+        <i class="fas fa-user"></i> My Profile
+      </a>
+    </nav>
+    <div class="sidebar-logout" id="nav-logout">
+      <i class="fas fa-sign-out-alt"></i> Logout
+    </div>
+  </aside>
+
+  <!-- Main content -->
+  <main class="dashboard-main">
+    <header class="dashboard-header">
+      <div>
+        <h1 id="welcome-user">Hi, Student</h1>
+        <p>Here is what is new on your dashboard today.</p>
+      </div>
+    </header>
+
+    <!-- Stats -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-header">
+          <h3>Total Jobs</h3>
+          <div class="stat-icon jobs"><i class="fas fa-briefcase"></i></div>
+        </div>
+        <div class="stat-value" id="stat-total-jobs">0</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-header">
+          <h3>Saved Jobs</h3>
+          <div class="stat-icon saved"><i class="fas fa-bookmark"></i></div>
+        </div>
+        <div class="stat-value" id="stat-saved-jobs">0</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-header">
+          <h3>Applications</h3>
+          <div class="stat-icon applied"><i class="fas fa-paper-plane"></i></div>
+        </div>
+        <div class="stat-value" id="stat-applied-jobs">0</div>
+      </div>
+    </div>
+
+    <!-- Profile completion -->
+    <div class="profile-completion">
+      <h3>Profile Completion</h3>
+      <div class="progress-track">
+        <div class="progress-fill" id="profile-completion-bar"></div>
+      </div>
+      <div class="progress-text">
+        <span id="profile-completion-text">0% Complete</span>
+        <span>Add your resume to improve job matches</span>
+      </div>
+    </div>
+
+    <!-- Average match -->
+    <div class="dashboard-section">
+      <h2><i class="fas fa-percentage"></i> Skill Match Overview</h2>
+      <div class="bg-white rounded-2xl border border-slate-100 p-6">
+        <p class="text-sm text-slate-600 mb-4">Your average skill match across available jobs</p>
+        <div id="avg-match"></div>
+      </div>
+    </div>
+
+    <!-- Recommended jobs -->
+    <div class="dashboard-section" id="recommended">
+      <h2><i class="fas fa-magic"></i> Recommended Jobs</h2>
+      <p class="text-sm text-slate-500 mb-4">Jobs matched to your skills</p>
+      <div class="dashboard-jobs" id="recommended-jobs">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+
+    <!-- Recent jobs -->
+    <div class="dashboard-section">
+      <h2><i class="fas fa-clock"></i> Recently Added Jobs</h2>
+      <div class="dashboard-jobs" id="recent-jobs">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+
+    <!-- Application status -->
+    <div class="dashboard-section" id="applications">
+      <h2><i class="fas fa-file-alt"></i> Application Status</h2>
+      <div id="application-status">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+  </main>
+
+  <script type="module">
+    import { updateNavbar } from './js/app.js';
+    document.addEventListener('DOMContentLoaded', () => {
+      updateNavbar();
+      // Sidebar active state handled by page
+      const logoutBtn = document.getElementById('nav-logout');
+      if (logoutBtn) logoutBtn.addEventListener('click', () => { window.handleLogout(); });
+      window.initStudentDashboard();
+    });
+  </script>
+</body>
+</html>

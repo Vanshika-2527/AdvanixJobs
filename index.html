@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Advanix | Every opportunity under one roof</title>
+  <meta name="description" content="Advanix - Every opportunity under one roof. Unified job and internship discovery platform for students and recruiters. Search, filter, save, and apply to opportunities from top Indian companies." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body class="auth-page">
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="container">
+      <a href="index.html" class="logo">
+        <div class="logo-icon"><i class="fas fa-briefcase"></i></div>
+        <span>Advanix<span class="text-gradient">Jobs</span></span>
+      </a>
+
+      <div class="nav-links" id="nav-links"></div>
+
+      <div class="auth-btns" id="auth-btns"></div>
+
+      <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobile-menu"></div>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1>Your Career.<br>Your Opportunities.<br>One Platform.</h1>
+        <p class="text-indigo-600 font-semibold text-sm uppercase tracking-wider mb-2">Every opportunity under one roof</p>
+        <p>
+          Advanix unifies job and internship discovery for students.
+          Search by skills, location, and role — get personalized recommendations,
+          save your favorites, and track applications in one place.
+        </p>
+        <div class="job-search">
+          <input type="text" id="hero-search-title" placeholder="Job title or skills" />
+          <input type="text" id="hero-search-location" placeholder="Location" />
+          <select id="hero-search-type">
+            <option value="">All job types</option>
+            <option value="Internship">Internship</option>
+            <option value="Full-time">Full-time</option>
+            <option value="Part-time">Part-time</option>
+          </select>
+          <button onclick="window.goToJobsFromHero()" class="btn btn-primary btn-lg">
+            Search Jobs <i class="fas fa-arrow-right ml-2"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="floating-card" style="top: 40px; left: 30px; width: 220px;">
+          <i class="fas fa-search text-3xl text-indigo-400 mb-3 block"></i>
+          <h4>Smart Search</h4>
+          <p>Filter by skills, location, type &amp; mode.</p>
+        </div>
+        <div class="floating-card" style="bottom: 40px; right: 30px; width: 260px;">
+          <i class="fas fa-heart text-3xl text-rose-500 mb-3 block"></i>
+          <h4>Save &amp; Track</h4>
+          <p>Bookmark jobs and track your applications.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Categories -->
+  <section class="section categories">
+    <div class="container">
+      <div class="section-header">
+        <h2>Browse <span class="text-gradient">Categories</span></h2>
+        <p>Explore opportunities across the most in-demand fields.</p>
+      </div>
+      <div class="category-grid">
+        <div class="category-card" onclick="window.filterByCategory('Web Development')">
+          <div class="icon"><i class="fas fa-laptop-code"></i></div>
+          <h3>Web Development</h3>
+          <p>Frontend, backend &amp; full-stack roles</p>
+        </div>
+        <div class="category-card" onclick="window.filterByCategory('Software Development')">
+          <div class="icon"><i class="fas fa-code"></i></div>
+          <h3>Software Development</h3>
+          <p>Java, Python &amp; engineering roles</p>
+        </div>
+        <div class="category-card" onclick="window.filterByCategory('Data Analytics')">
+          <div class="icon"><i class="fas fa-chart-bar"></i></div>
+          <h3>Data Analytics</h3>
+          <p>Python, SQL &amp; business intelligence</p>
+        </div>
+        <div class="category-card" onclick="window.filterByCategory('Digital Marketing')">
+          <div class="icon"><i class="fas fa-bullhorn"></i></div>
+          <h3>Digital Marketing</h3>
+          <p>SEO, SEM &amp; growth roles</p>
+        </div>
+        <div class="category-card" onclick="window.filterByCategory('Business Development')">
+          <div class="icon"><i class="fas fa-handshake"></i></div>
+          <h3>Business Development</h3>
+          <p>Sales &amp; partnership roles</p>
+        </div>
+        <div class="category-card" onclick="window.filterByCategory('Finance')">
+          <div class="icon"><i class="fas fa-money-bill-wave"></i></div>
+          <h3>Finance</h3>
+          <p>Accounting &amp; financial analysis</p>
+        </div>
+        <div class="category-card" onclick="window.filterByCategory('Graphic Design')">
+          <div class="icon"><i class="fas fa-palette"></i></div>
+          <h3>Graphic Design</h3>
+          <p>Photoshop, Illustrator &amp; visual design</p>
+        </div>
+        <div class="category-card" onclick="window.filterByCategory('UI/UX Design')">
+          <div class="icon"><i class="fas fa-pen-ruler"></i></div>
+          <h3>UI/UX Design</h3>
+          <p>Figma, research &amp; product design</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Jobs -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Featured <span class="text-gradient">Jobs</span></h2>
+        <p>Recently added opportunities from top companies.</p>
+      </div>
+      <div class="featured-grid" id="featured-jobs-grid">
+        <!-- Jobs rendered by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Top Companies -->
+  <section class="section" style="background: var(--slate-50);">
+    <div class="container">
+      <div class="section-header">
+        <h2>Top <span class="text-gradient">Companies</span></h2>
+        <p>Hiring partners on Advanix.</p>
+      </div>
+      <div class="companies-grid">
+        <div class="company-card">
+          <img src="https://ui-avatars.com/api/?name=Zomato&background=FF3E00&color=fff" alt="Zomato" class="company-logo" />
+          <h3>Zomato</h3>
+          <p>Food Delivery &amp; Tech</p>
+        </div>
+        <div class="company-card">
+          <img src="https://ui-avatars.com/api/?name=Flipkart&background=2874F6&color=fff" alt="Flipkart" class="company-logo" />
+          <h3>Flipkart</h3>
+          <p>E-commerce</p>
+        </div>
+        <div class="company-card">
+          <img src="https://ui-avatars.com/api/?name=Infosys&background=00A86B&color=fff" alt="Infosys" class="company-logo" />
+          <h3>Infosys</h3>
+          <p>IT Services</p>
+        </div>
+        <div class="company-card">
+          <img src="https://ui-avatars.com/api/?name=Paytm&background=002144&color=fff" alt="Paytm" class="company-logo" />
+          <h3>Paytm</h3>
+          <p>Fintech</p>
+        </div>
+        <div class="company-card">
+          <img src="https://ui-avatars.com/api/?name=Swiggy&background=F13A25&color=fff" alt="Swiggy" class="company-logo" />
+          <h3>Swiggy</h3>
+          <p>Food Delivery</p>
+        </div>
+        <div class="company-card">
+          <img src="https://ui-avatars.com/api/?name=PhonePe&background=7342D6&color=fff" alt="PhonePe" class="company-logo" />
+          <h3>PhonePe</h3>
+          <p>Digital Payments</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2>How It <span class="text-gradient">Works</span></h2>
+        <p>Get from student to hired in four simple steps.</p>
+      </div>
+      <div class="steps-grid">
+        <div class="step">
+          <div class="step-number">1</div>
+          <h3>Create Profile</h3>
+          <p>Sign up as a student or recruiter and complete your profile with skills and education.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">2</div>
+          <h3>Find Jobs</h3>
+          <p>Search and filter internships and jobs by skills, location, and work mode.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">3</div>
+          <h3>Save &amp; Apply</h3>
+          <p>Save interesting jobs and apply with one click. Track your application status.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">4</div>
+          <h3>Get Shortlisted</h3>
+          <p>Recruiters review applications and shortlist candidates for interviews.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Choose Advanix -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Why Choose <span class="text-gradient">Advanix?</span></h2>
+        <p>Built for students, trusted by recruiters.</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-university"></i></div>
+          <h3>Student-First</h3>
+          <p>Designed for college students seeking internships and entry-level roles.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-brain"></i></div>
+          <h3>Skill Matching</h3>
+          <p>Calculate how well your skills match each job and discover skill gaps.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-save"></i></div>
+          <h3>Save &amp; Track</h3>
+          <p>Bookmark jobs you like and track every application from one dashboard.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-shield-halved"></i></div>
+          <h3>Demo-Ready</h3>
+          <p>All interactions work locally with clearly marked sample data.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="section testimonials">
+    <div class="container">
+      <div class="section-header">
+        <h2>Student <span class="text-gradient">Testimonials</span></h2>
+        <p>Sample feedback from our early users.</p>
+      </div>
+      <div class="testimonial-grid">
+        <div class="testimonial-card">
+          <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+          <p>"Advanix helped me find a frontend internship at Zomato. The skill match feature showed me exactly what to learn."</p>
+          <div class="testimonial-author">
+            <img src="https://ui-avatars.com/api/?name=Aarav+Sharma&background=4F46E5&color=fff" alt="Aarav" class="author-avatar" />
+            <div class="author-info">
+              <h4>Aarav Sharma</h4>
+              <span>DTU • B.Tech CSE</span>
+            </div>
+          </div>
+          <span class="demo-badge">Sample content</span>
+        </div>
+        <div class="testimonial-card">
+          <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-stroke"></i></div>
+          <p>I saved five data analytics internships and tracked my applications easily. Great platform for students.</p>
+          <div class="testimonial-author">
+            <img src="https://ui-avatars.com/api/?name=Sneha+Reddy&background=A855F7&color=fff" alt="Sneha" class="author-avatar" />
+            <div class="author-info">
+              <h4>Sneha Reddy</h4>
+              <span>IIT Hyderabad • B.Tech</span>
+            </div>
+          </div>
+          <span class="demo-badge">Sample content</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section cta">
+    <div class="container">
+      <h2>Ready to Start Your Career?</h2>
+      <p>Join thousands of students discovering internships and jobs on Advanix.</p>
+      <a href="register.html" class="btn btn-primary btn-lg">Create Free Account</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="logo">
+            <div class="logo-icon"><i class="fas fa-briefcase"></i></div>
+            <span>Advanix<span class="text-gradient">Jobs</span></span>
+          </a>
+          <p>A unified job and internship discovery platform built for students and recruiters.</p>
+          <div class="socials">
+            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+          </div>
+        </div>
+        <div>
+          <div class="footer-title">For Students</div>
+          <ul class="footer-links">
+            <li><a href="jobs.html">Find Jobs</a></li>
+            <li><a href="register.html?role=student">Register as Student</a></li>
+            <li><a href="student-dashboard.html">Student Dashboard</a></li>
+            <li><a href="profile.html">My Profile</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-title">For Recruiters</div>
+          <ul class="footer-links">
+            <li><a href="register.html?role=recruiter">Register as Recruiter</a></li>
+            <li><a href="recruiter-dashboard.html">Recruiter Dashboard</a></li>
+            <li><a href="#">Post a Job</a></li>
+            <li><a href="#">Manage Applications</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-title">Company</div>
+          <ul class="footer-links">
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>&copy; 2026 Advanix. All rights reserved.</div>
+        <div><strong>Tagline:</strong> Every opportunity under one roof</div>
+        <div><strong>Prototype:</strong> Demo data — not production-secure.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module">
+    import { updateNavbar } from './js/app.js';
+
+    // Global helper used by hero search button
+    window.goToJobsFromHero = function () {
+      const title = document.getElementById('hero-search-title').value.trim();
+      const location = document.getElementById('hero-search-location').value.trim();
+      const type = document.getElementById('hero-search-type').value;
+      const url = new URL('jobs.html', location.origin);
+      if (title) url.searchParams.set('q', title);
+      if (location) url.searchParams.set('location', location);
+      if (type) url.searchParams.set('jobType', type);
+      location.href = url.toString();
+    };
+
+    // Filter by category from landing page
+    window.filterByCategory = function (category) {
+      const url = new URL('jobs.html', location.origin);
+      url.searchParams.set('q', category);
+      location.href = url.toString();
+    };
+
+    document.addEventListener('DOMContentLoaded', () => {
+      updateNavbar();
+    });
+  </script>
+</body>
+</html>
