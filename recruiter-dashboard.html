@@ -3,21 +3,43 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Recruiter Dashboard | Advanix</title>
+  <title>Recruiter Dashboard | Smart JobConnect</title>
+  <meta name="description" content="Smart JobConnect - Recruiter dashboard." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
-  <link rel="stylesheet" href="css/dashboard.css" />
   <link rel="stylesheet" href="css/responsive.css" />
 </head>
 <body>
+
+  <!-- Navbar -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <a href="index.html" class="logo">
+        <div class="logo-icon"><i class="fas fa-briefcase"></i></div>
+        <span>Smart<span class="text-indigo-600"> JobConnect</span></span>
+      </a>
+
+      <div class="nav-links" id="nav-links"></div>
+
+      <div class="auth-btns" id="auth-btns">
+        <button onclick="handleLogout()" class="btn btn-outline text-slate-600 hover:text-indigo-600">Logout</button>
+      </div>
+
+      <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobile-menu"></div>
+
   <!-- Sidebar -->
   <aside class="sidebar" id="sidebar">
     <div class="sidebar-brand">
       <div class="logo-icon"><i class="fas fa-briefcase"></i></div>
-      <span>Advanix<span class="text-gradient">Jobs</span></span>
+      <span>Smart<span class="text-indigo-600"> JobConnect</span></span>
     </div>
     <nav>
       <a href="recruiter-dashboard.html" class="sidebar-item active" id="nav-dashboard">
@@ -26,10 +48,10 @@
       <a href="jobs.html" class="sidebar-item" id="nav-find-jobs">
         <i class="fas fa-search"></i> Find Jobs
       </a>
-      <a href="#applicants" class="sidebar-item" id="nav-applicants">
+      <a href="recruiter-dashboard.html#applicants" class="sidebar-item" id="nav-applicants">
         <i class="fas fa-users"></i> Applicants
       </a>
-      <a href="#manage-jobs" class="sidebar-item" id="nav-manage-jobs">
+      <a href="recruiter-dashboard.html#manage-jobs" class="sidebar-item" id="nav-manage-jobs">
         <i class="fas fa-tasks"></i> Manage Jobs
       </a>
     </nav>
@@ -42,8 +64,8 @@
   <main class="dashboard-main">
     <header class="dashboard-header">
       <div>
-        <h1 id="welcome-user">Hi, Recruiter</h1>
-        <p>Manage your job listings and review applications.</p>
+        <h1 id="welcome-user" class="text-2xl font-bold text-navy-900">Hi, Recruiter</h1>
+        <p class="text-slate-500">Manage your job listings and review applications.</p>
       </div>
       <button id="post-job-btn" class="btn btn-primary btn-md">
         <i class="fas fa-plus mr-2"></i> Post New Job
@@ -55,21 +77,21 @@
       <div class="stat-card">
         <div class="stat-header">
           <h3>Active Jobs</h3>
-          <div class="stat-icon jobs"><i class="fas fa-briefcase"></i></div>
+          <div class="stat-icon jobs"><i class="fas fa-briefcase text-indigo-400"></i></div>
         </div>
         <div class="stat-value" id="stat-active-jobs">0</div>
       </div>
       <div class="stat-card">
         <div class="stat-header">
           <h3>Applications</h3>
-          <div class="stat-icon saved"><i class="fas fa-inbox"></i></div>
+          <div class="stat-icon applied"><i class="fas fa-inbox text-violet-400"></i></div>
         </div>
         <div class="stat-value" id="stat-total-apps">0</div>
       </div>
       <div class="stat-card">
         <div class="stat-header">
           <h3>Shortlisted</h3>
-          <div class="stat-icon applied"><i class="fas fa-check-circle"></i></div>
+          <div class="stat-icon applied"><i class="fas fa-check-circle text-success-400"></i></div>
         </div>
         <div class="stat-value" id="stat-shortlisted">0</div>
       </div>
@@ -78,7 +100,7 @@
     <!-- Recent applications -->
     <div class="dashboard-section">
       <div class="manage-jobs-header">
-        <h2><i class="fas fa-inbox"></i> Recent Applications</h2>
+        <h2 class="text-sm font-medium text-slate-600"><i class="fas fa-inbox text-violet-400"></i> Recent Applications</h2>
       </div>
       <div class="applications-list" id="recent-applications">
         <!-- Populated by JS -->
@@ -95,39 +117,39 @@
         <div class="modal-body">
           <form id="post-job-form" class="post-job-form">
             <div class="form-group">
-              <label>Job title</label>
+              <label for="job-title" class="text-sm font-medium text-slate-600 block mb-2">Job title</label>
               <input type="text" id="job-title" class="form-control" placeholder="e.g. Frontend Intern" required />
             </div>
             <div class="form-group">
-              <label>Company</label>
+              <label for="job-company" class="text-sm font-medium text-slate-600 block mb-2">Company</label>
               <input type="text" id="job-company" class="form-control" placeholder="e.g. Zomato" required />
             </div>
             <div class="form-group full-width">
-              <label>Job description</label>
+              <label for="job-description" class="text-sm font-medium text-slate-600 block mb-2">Job description</label>
               <textarea id="job-description" class="form-control" rows="4" placeholder="Describe the role and responsibilities..." required></textarea>
             </div>
             <div class="form-group full-width">
-              <label>Responsibilities (one per line)</label>
-              <textarea id="job-responsibilities" class="form-control" rows="3" placeholder="• Develop features\n• Fix bugs\n• Attend standups"></textarea>
+              <label for="job-responsibilities" class="text-sm font-medium text-slate-600 block mb-2">Responsibilities (one per line)</label>
+              <textarea id="job-responsibilities" class="form-control" rows="3" placeholder="• Develop features\n• Fix bugs• Attend standups"></textarea>
             </div>
             <div class="form-group full-width">
-              <label>Qualifications (one per line)</label>
-              <textarea id="job-qualifications" class="form-control" rows="3" placeholder="• Degree in CS\n• 1+ years experience"></textarea>
+              <label for="job-qualifications" class="text-sm font-medium text-slate-600 block mb-2">Qualifications (one per line)</label>
+              <textarea id="job-qualifications" class="form-control" rows="3" placeholder="• Degree in CS• 1+ years experience"></textarea>
             </div>
             <div class="form-group">
-              <label>Required skills (comma-separated)</label>
+              <label for="job-skills" class="text-sm font-medium text-slate-600 block mb-2">Required skills (comma-separated)</label>
               <input type="text" id="job-skills" class="form-control" placeholder="HTML, CSS, JavaScript, React" required />
             </div>
             <div class="form-group">
-              <label>Location</label>
+              <label for="job-location" class="text-sm font-medium text-slate-600 block mb-2">Location</label>
               <input type="text" id="job-location" class="form-control" placeholder="Bangalore, Karnataka" required />
             </div>
             <div class="form-group">
-              <label>Salary / stipend</label>
+              <label for="job-salary" class="text-sm font-medium text-slate-600 block mb-2">Salary / stipend</label>
               <input type="text" id="job-salary" class="form-control" placeholder="₹20,000 / month" required />
             </div>
             <div class="form-group">
-              <label>Job type</label>
+              <label for="job-type" class="text-sm font-medium text-slate-600 block mb-2">Job type</label>
               <select id="job-type" class="form-control">
                 <option value="Internship">Internship</option>
                 <option value="Full-time">Full-time</option>
@@ -135,7 +157,7 @@
               </select>
             </div>
             <div class="form-group">
-              <label>Work mode</label>
+              <label for="job-workmode" class="text-sm font-medium text-slate-600 block mb-2">Work mode</label>
               <select id="job-workmode" class="form-control">
                 <option value="Remote">Remote</option>
                 <option value="Hybrid">Hybrid</option>
@@ -143,11 +165,11 @@
               </select>
             </div>
             <div class="form-group">
-              <label>Experience required</label>
+              <label for="job-experience" class="text-sm font-medium text-slate-600 block mb-2">Experience required</label>
               <input type="text" id="job-experience" class="form-control" placeholder="0-1 years" required />
             </div>
             <div class="form-group">
-              <label>Application deadline</label>
+              <label for="job-deadline" class="text-sm font-medium text-slate-600 block mb-2">Application deadline</label>
               <input type="date" id="job-deadline" class="form-control" required />
             </div>
             <input type="hidden" id="edit-job-id" />
@@ -163,7 +185,7 @@
     <!-- Manage jobs -->
     <div class="dashboard-section" id="manage-jobs">
       <div class="manage-jobs-header">
-        <h2><i class="fas fa-tasks"></i> Manage Your Jobs</h2>
+        <h2 class="text-sm font-medium text-slate-600"><i class="fas fa-tasks text-indigo-400"></i> Manage Your Jobs</h2>
       </div>
       <div id="manage-jobs-list">
         <!-- Populated by JS -->
@@ -181,5 +203,6 @@
       window.initPostJobForm();
     });
   </script>
+
 </body>
 </html>

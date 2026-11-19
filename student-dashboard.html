@@ -3,21 +3,43 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Student Dashboard | Advanix</title>
+  <title>Student Dashboard | Smart JobConnect</title>
+  <meta name="description" content="Smart JobConnect - Student dashboard." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
-  <link rel="stylesheet" href="css/dashboard.css" />
   <link rel="stylesheet" href="css/responsive.css" />
 </head>
 <body>
+
+  <!-- Navbar -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <a href="index.html" class="logo">
+        <div class="logo-icon"><i class="fas fa-briefcase"></i></div>
+        <span>Smart<span class="text-indigo-600"> JobConnect</span></span>
+      </a>
+
+      <div class="nav-links" id="nav-links"></div>
+
+      <div class="auth-btns" id="auth-btns">
+        <button onclick="handleLogout()" class="btn btn-outline text-slate-600 hover:text-indigo-600">Logout</button>
+      </div>
+
+      <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobile-menu"></div>
+
   <!-- Sidebar -->
   <aside class="sidebar" id="sidebar">
     <div class="sidebar-brand">
       <div class="logo-icon"><i class="fas fa-briefcase"></i></div>
-      <span>Advanix<span class="text-gradient">Jobs</span></span>
+      <span>Smart<span class="text-indigo-600"> JobConnect</span></span>
     </div>
     <nav>
       <a href="student-dashboard.html" class="sidebar-item active" id="nav-dashboard">
@@ -48,8 +70,8 @@
   <main class="dashboard-main">
     <header class="dashboard-header">
       <div>
-        <h1 id="welcome-user">Hi, Student</h1>
-        <p>Here is what is new on your dashboard today.</p>
+        <h1 id="welcome-user" class="text-2xl font-bold text-navy-900">Hi, Student</h1>
+        <p class="text-slate-500">Here is what is new on your dashboard today.</p>
       </div>
     </header>
 
@@ -58,21 +80,21 @@
       <div class="stat-card">
         <div class="stat-header">
           <h3>Total Jobs</h3>
-          <div class="stat-icon jobs"><i class="fas fa-briefcase"></i></div>
+          <div class="stat-icon jobs"><i class="fas fa-briefcase text-indigo-400"></i></div>
         </div>
         <div class="stat-value" id="stat-total-jobs">0</div>
       </div>
       <div class="stat-card">
         <div class="stat-header">
           <h3>Saved Jobs</h3>
-          <div class="stat-icon saved"><i class="fas fa-bookmark"></i></div>
+          <div class="stat-icon saved"><i class="fas fa-bookmark text-violet-400"></i></div>
         </div>
         <div class="stat-value" id="stat-saved-jobs">0</div>
       </div>
       <div class="stat-card">
         <div class="stat-header">
           <h3>Applications</h3>
-          <div class="stat-icon applied"><i class="fas fa-paper-plane"></i></div>
+          <div class="stat-icon applied"><i class="fas fa-paper-plane text-success-400"></i></div>
         </div>
         <div class="stat-value" id="stat-applied-jobs">0</div>
       </div>
@@ -80,45 +102,45 @@
 
     <!-- Profile completion -->
     <div class="profile-completion">
-      <h3>Profile Completion</h3>
+      <h3 class="text-sm font-medium text-slate-600 mb-3">Profile Completion</h3>
       <div class="progress-track">
         <div class="progress-fill" id="profile-completion-bar"></div>
       </div>
       <div class="progress-text">
         <span id="profile-completion-text">0% Complete</span>
-        <span>Add your resume to improve job matches</span>
+        <span class="text-slate-500">Add your resume to improve job matches</span>
       </div>
     </div>
 
     <!-- Average match -->
     <div class="dashboard-section">
-      <h2><i class="fas fa-percentage"></i> Skill Match Overview</h2>
-      <div class="bg-white rounded-2xl border border-slate-100 p-6">
-        <p class="text-sm text-slate-600 mb-4">Your average skill match across available jobs</p>
+      <h2 class="text-sm font-medium text-slate-600 mb-3 flex items-center gap-2"><i class="fas fa-percentage text-indigo-400"></i> Skill Match Overview</h2>
+      <div class="bg-white rounded-2xl border border-border p-6">
+        <p class="text-sm text-slate-500 mb-4">Your average skill match across available jobs</p>
         <div id="avg-match"></div>
       </div>
     </div>
 
     <!-- Recommended jobs -->
     <div class="dashboard-section" id="recommended">
-      <h2><i class="fas fa-magic"></i> Recommended Jobs</h2>
+      <h2 class="text-sm font-medium text-slate-600 mb-3 flex items-center gap-2"><i class="fas fa-magic text-violet-400"></i> Recommended Jobs</h2>
       <p class="text-sm text-slate-500 mb-4">Jobs matched to your skills</p>
-      <div class="dashboard-jobs" id="recommended-jobs">
+      <div class="dashboard-jobs-grid" id="recommended-jobs">
         <!-- Populated by JS -->
       </div>
     </div>
 
     <!-- Recent jobs -->
     <div class="dashboard-section">
-      <h2><i class="fas fa-clock"></i> Recently Added Jobs</h2>
-      <div class="dashboard-jobs" id="recent-jobs">
+      <h2 class="text-sm font-medium text-slate-600 mb-3 flex items-center gap-2"><i class="fas fa-clock text-indigo-400"></i> Recently Added Jobs</h2>
+      <div class="dashboard-jobs-grid" id="recent-jobs">
         <!-- Populated by JS -->
       </div>
     </div>
 
     <!-- Application status -->
     <div class="dashboard-section" id="applications">
-      <h2><i class="fas fa-file-alt"></i> Application Status</h2>
+      <h2 class="text-sm font-medium text-slate-600 mb-3 flex items-center gap-2"><i class="fas fa-file-alt text-indigo-400"></i> Application Status</h2>
       <div id="application-status">
         <!-- Populated by JS -->
       </div>
@@ -135,5 +157,6 @@
       window.initStudentDashboard();
     });
   </script>
+
 </body>
 </html>

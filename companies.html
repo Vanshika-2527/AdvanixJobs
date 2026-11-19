@@ -3,23 +3,28 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Companies | Advanix</title>
+  <title>Companies | Smart JobConnect</title>
+  <meta name="description" content="Smart JobConnect - Companies hiring on our platform." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/responsive.css" />
 </head>
 <body>
-  <nav class="navbar">
+
+  <!-- Navbar -->
+  <nav class="navbar" id="navbar">
     <div class="container">
       <a href="index.html" class="logo">
         <div class="logo-icon"><i class="fas fa-briefcase"></i></div>
-        <span>Advanix<span class="text-gradient">Jobs</span></span>
+        <span>Smart<span class="text-indigo-600"> JobConnect</span></span>
       </a>
+
       <div class="nav-links" id="nav-links"></div>
+
       <div class="auth-btns" id="auth-btns"></div>
+
       <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle menu">
         <span></span><span></span><span></span>
       </button>
@@ -28,21 +33,21 @@
 
   <div class="mobile-menu" id="mobile-menu"></div>
 
-  <section class="section" style="padding-top: 60px;">
+  <section class="section" style="padding-top: 80px; padding-bottom: 80px;">
     <div class="container">
       <div class="section-header">
-        <h1>Top <span class="text-gradient">Companies</span></h1>
-        <p>Explore companies hiring on Advanix and see their open opportunities.</p>
+        <h1>Leading <span class="text-indigo-600">Companies</span></h1>
+        <p>Hiring partners on Smart JobConnect.</p>
       </div>
 
       <div class="companies-grid" id="companies-list">
-        <!-- Populated by JS from job data -->
+        <!-- Populated by JS -->
       </div>
 
-      <div class="mt-10 text-center text-slate-500 text-sm">
-        <p>
+      <div class="mt-8 text-center">
+        <p class="text-slate-500 text-sm">
           Company logos are generated placeholders for this prototype. All listings shown are sample/demo data.
-          Visit <a href="jobs.html" class="text-indigo-600 font-semibold">Find Jobs</a> to browse open positions.
+          <a href="jobs.html" class="text-indigo-600 font-semibold underline">Find Jobs</a> to browse open positions.
         </p>
       </div>
     </div>
@@ -85,5 +90,6 @@
         .join('');
     });
   </script>
+
 </body>
 </html>
